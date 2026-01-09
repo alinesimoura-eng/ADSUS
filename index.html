@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,12 +13,12 @@
             --light: #ecf0f1;
             --dark: #7f8c8d;
             
-            /* Cores da Escala */
-            --c-unsustainable: #c0392b; /* Vermelho */
-            --c-low: #e67e22;           /* Laranja */
-            --c-inter: #f1c40f;         /* Amarelo */
-            --c-good: #8bc34a;          /* Verde Claro */
-            --c-excellent: #2ecc71;     /* Verde Escuro */
+            /* Scale Colors */
+            --c-unsustainable: #c0392b; /* Red */
+            --c-low: #e67e22;           /* Orange */
+            --c-inter: #f1c40f;         /* Yellow */
+            --c-good: #8bc34a;          /* Light Green */
+            --c-excellent: #2ecc71;     /* Dark Green */
         }
 
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; color: #333; margin: 0; padding: 20px; }
@@ -48,20 +48,20 @@
         /* RESULT SECTION & GRAPHIC */
         .result-section { text-align: center; background: #fff; padding: 40px; border-radius: 10px; margin-top: 40px; border: 2px solid var(--secondary); box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
         
-        /* Container do SVG */
+        /* SVG Container */
         .chart-container {
             position: relative;
-            width: 500px;  /* Aumentado um pouco para caber bem */
+            width: 500px;
             height: 260px;
             margin: 0 auto;
             overflow: hidden;
         }
         
-        /* Estilos do Texto dentro do SVG */
+        /* SVG Text Styles */
         .chart-text { font-family: 'Segoe UI', sans-serif; font-size: 14px; font-weight: bold; fill: #fff; pointer-events: none; }
         .stage-text { font-family: 'Segoe UI', sans-serif; font-size: 18px; font-weight: 900; fill: #fff; pointer-events: none; }
         
-        /* Nota Global Bem Grande */
+        /* Large Global Score */
         .global-score-text { font-family: 'Segoe UI', sans-serif; font-size: 65px; font-weight: 800; fill: #333; }
         
         .global-label { font-family: 'Segoe UI', sans-serif; font-size: 12px; fill: #666; text-transform: uppercase; letter-spacing: 1px; }
@@ -87,17 +87,17 @@
 
     <form id="adsusForm">
         
-        <!-- ======================= PRODUÇÃO ======================= -->
-        <h3 class="section-title">Etapa de Produção (P)</h3>
+        <!-- ======================= PRODUCTION ======================= -->
+        <h3 class="section-title">Production Stage (P)</h3>
 
         <!-- P1 -->
         <div class="criteria-row">
             <div class="input-group">
-                <label>P1: Matéria-prima Renovável (%S)</label>
-                <div class="desc-text">Massa total usada no preparo e massa de material sustentável.</div>
+                <label>P1: Renewable Raw Material (%S)</label>
+                <div class="desc-text">Total mass used in preparation and mass of sustainable material.</div>
                 <div style="display:flex; gap:10px;">
-                    <div style="flex:1"><label style="font-size:0.8rem">Massa Total (g):</label><input type="number" id="p1_total" min="0" step="0.01" oninput="calcP1()"></div>
-                    <div style="flex:1"><label style="font-size:0.8rem">Massa Sustentável (g):</label><input type="number" id="p1_sus" min="0" step="0.01" oninput="calcP1()"></div>
+                    <div style="flex:1"><label style="font-size:0.8rem">Total Mass (g):</label><input type="number" id="p1_total" min="0" step="0.01" oninput="calcP1()"></div>
+                    <div style="flex:1"><label style="font-size:0.8rem">Sustainable Mass (g):</label><input type="number" id="p1_sus" min="0" step="0.01" oninput="calcP1()"></div>
                 </div>
             </div>
             <div class="score-box">
@@ -109,11 +109,11 @@
         <!-- P2 -->
         <div class="criteria-row">
             <div class="input-group">
-                <label>P2: Matéria-prima Tóxica (%T)</label>
-                <div class="desc-text">Massa de material tóxico/agressivo, excluindo solvente.</div>
+                <label>P2: Toxic Raw Material (%T)</label>
+                <div class="desc-text">Mass of toxic/aggressive material, excluding solvent.</div>
                 <div style="display:flex; gap:10px;">
-                    <div style="flex:1"><label style="font-size:0.8rem">Massa Total (g):</label><input type="number" id="p2_total" disabled style="background:#eee;" title="Vem de P1"></div>
-                    <div style="flex:1"><label style="font-size:0.8rem">Massa Tóxica (g):</label><input type="number" id="p2_tox" min="0" step="0.01" oninput="calcP2()"></div>
+                    <div style="flex:1"><label style="font-size:0.8rem">Total Mass (g):</label><input type="number" id="p2_total" disabled style="background:#eee;" title="From P1"></div>
+                    <div style="flex:1"><label style="font-size:0.8rem">Toxic Mass (g):</label><input type="number" id="p2_tox" min="0" step="0.01" oninput="calcP2()"></div>
                 </div>
             </div>
             <div class="score-box">
@@ -125,17 +125,17 @@
         <!-- P3 -->
         <div class="criteria-row">
             <div class="input-group">
-                <label>P3: Uso de Solventes Tóxicos</label>
+                <label>P3: Use of Toxic Solvents</label>
                 <select id="p3_select" onchange="calcP3()">
-                    <option value="1">1.00 - Verde (Água, Etanol, Etil Lactato)</option>
-                    <option value="0.9">0.90 - Baixa Tox + Biodegradável (Acetato Etila)</option>
-                    <option value="0.8">0.80 - Baixa Tox + Persistente (PEG, DMSO)</option>
-                    <option value="0.75">0.75 - Mod. Tox + Biodegradável (Acetonitrila)</option>
-                    <option value="0.6">0.60 - Mod. Tox + Persistente (DMF)</option>
-                    <option value="0.45">0.45 - Tóxico (Metanol, THF)</option>
-                    <option value="0.3">0.30 - Tóxico e Inflamável (Tolueno)</option>
-                    <option value="0.15">0.15 - Tóxico e Bioacumulativo (NMP)</option>
-                    <option value="0">0.00 - Proibido/Perigoso (Benzeno)</option>
+                    <option value="1">1.00 - Green (Water, Ethanol, Ethyl Lactate)</option>
+                    <option value="0.9">0.90 - Low Tox + Biodegradable (Ethyl Acetate)</option>
+                    <option value="0.8">0.80 - Low Tox + Persistent (PEG, DMSO)</option>
+                    <option value="0.75">0.75 - Mod. Tox + Biodegradable (Acetonitrile)</option>
+                    <option value="0.6">0.60 - Mod. Tox + Persistent (DMF)</option>
+                    <option value="0.45">0.45 - Toxic (Methanol, THF)</option>
+                    <option value="0.3">0.30 - Toxic and Flammable (Toluene)</option>
+                    <option value="0.15">0.15 - Toxic and Bioaccumulative (NMP)</option>
+                    <option value="0">0.00 - Banned/Dangerous (Benzene)</option>
                 </select>
             </div>
             <div class="score-box">
@@ -147,21 +147,21 @@
         <!-- P4 -->
         <div class="criteria-row">
             <div class="input-group" style="width: 100%; flex: 0 0 100%;">
-                <label>P4: Consumo Energético</label>
-                <div class="desc-text">Consumo total (kWh) dividido pela massa produzida (kg).</div>
+                <label>P4: Energy Consumption</label>
+                <div class="desc-text">Total consumption (kWh) divided by produced mass (kg).</div>
                 <table>
                     <thead>
-                        <tr><th>Equipamento</th><th>Potência (W)</th><th>Tempo (h)</th><th>Energia (kWh)</th><th></th></tr>
+                        <tr><th>Equipment</th><th>Power (W)</th><th>Time (h)</th><th>Energy (kWh)</th><th></th></tr>
                     </thead>
                     <tbody id="p4_table">
-                        <tr><td><input type="text" placeholder="Ex: Forno"></td><td><input type="number" class="p4-w" oninput="calcP4()"></td><td><input type="number" class="p4-h" oninput="calcP4()"></td><td class="p4-res">0</td><td></td></tr>
+                        <tr><td><input type="text" placeholder="Ex: Oven"></td><td><input type="number" class="p4-w" oninput="calcP4()"></td><td><input type="number" class="p4-h" oninput="calcP4()"></td><td class="p4-res">0</td><td></td></tr>
                     </tbody>
                 </table>
-                <button type="button" class="add-btn" onclick="addP4Row()">+ Equipamento</button>
+                <button type="button" class="add-btn" onclick="addP4Row()">+ Equipment</button>
                 <div style="margin-top:10px; display:flex; gap:10px; align-items:center;">
-                    <label>Massa Produzida (kg):</label>
+                    <label>Produced Mass (kg):</label>
                     <input type="number" id="p4_mass" value="1" step="0.01" style="width:100px" oninput="calcP4()">
-                    <span style="margin-left:auto; font-weight:bold; color:var(--primary)">Específico: <span id="p4_kwh_kg">0.00</span> kWh/kg</span>
+                    <span style="margin-left:auto; font-weight:bold; color:var(--primary)">Specific: <span id="p4_kwh_kg">0.00</span> kWh/kg</span>
                 </div>
             </div>
             <div class="score-box">
@@ -173,14 +173,14 @@
         <!-- P5 -->
         <div class="criteria-row">
             <div class="input-group">
-                <label>P5: Resíduos Gerados (E-factor)</label>
+                <label>P5: Generated Waste (E-factor)</label>
                 <select id="p5_select" onchange="calcP5()">
-                    <option value="1">1.00 - Sem resíduos (E = 0)</option>
+                    <option value="1">1.00 - No waste (E = 0)</option>
                     <option value="0.85">0.85 - x ≤ 1 g/g (E ≤ 1)</option>
                     <option value="0.6">0.60 - 1 < x ≤ 5 g/g</option>
                     <option value="0.35">0.35 - 5 < x ≤ 10 g/g</option>
                     <option value="0.1">0.10 - x > 10 g/g</option>
-                    <option value="0">0.00 - Resíduos Perigosos</option>
+                    <option value="0">0.00 - Hazardous Waste</option>
                 </select>
             </div>
             <div class="score-box">
@@ -192,7 +192,7 @@
         <!-- P6 -->
         <div class="criteria-row">
             <div class="input-group">
-                <label>P6: Segurança do Operador</label>
+                <label>P6: Operator Safety</label>
                 <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:10px;">
                     <div>
                         <label style="font-size:0.8rem">Temp (ST)</label>
@@ -205,9 +205,9 @@
                         </select>
                     </div>
                     <div>
-                        <label style="font-size:0.8rem">Pressão (SP)</label>
+                        <label style="font-size:0.8rem">Pressure (SP)</label>
                         <select class="p6-sub" onchange="calcP6()">
-                            <option value="1">Ambiente</option>
+                            <option value="1">Ambient</option>
                             <option value="0.75">1-5 bar</option>
                             <option value="0.5">5-20 bar</option>
                             <option value="0.25">20-50 bar</option>
@@ -215,13 +215,13 @@
                         </select>
                     </div>
                     <div>
-                        <label style="font-size:0.8rem">Risco GHS (SG)</label>
+                        <label style="font-size:0.8rem">GHS Risk (SG)</label>
                         <select class="p6-sub" onchange="calcP6()">
-                            <option value="1">Nenhum</option>
-                            <option value="0.75">Baixo (Irritante)</option>
-                            <option value="0.5">Médio (Inflam/Tóx)</option>
-                            <option value="0.25">Alto (Corrosivo)</option>
-                            <option value="0">Crítico (Explos/Cancer)</option>
+                            <option value="1">None</option>
+                            <option value="0.75">Low (Irritant)</option>
+                            <option value="0.5">Medium (Flamm/Toxic)</option>
+                            <option value="0.25">High (Corrosive)</option>
+                            <option value="0">Critical (Explos/Cancer)</option>
                         </select>
                     </div>
                 </div>
@@ -232,13 +232,13 @@
             </div>
         </div>
 
-        <!-- ======================= APLICAÇÃO ======================= -->
-        <h3 class="section-title">Etapa de Aplicação (A)</h3>
+        <!-- ======================= APPLICATION ======================= -->
+        <h3 class="section-title">Application Stage (A)</h3>
 
         <!-- A1 -->
         <div class="criteria-row">
             <div class="input-group">
-                <label>A1: Capacidade de Adsorção (q<sub>e,max</sub>)</label>
+                <label>A1: Adsorption Capacity (q<sub>e,max</sub>)</label>
                 <select id="a1_select" onchange="calcA1()">
                     <option value="1">1.00 - q > 1.50</option>
                     <option value="0.75">0.75 - 0.75 < q ≤ 1.50</option>
@@ -256,13 +256,13 @@
         <!-- A2 -->
         <div class="criteria-row">
             <div class="input-group">
-                <label>A2: Reutilização (Ciclos)</label>
+                <label>A2: Reuse (Cycles)</label>
                 <select id="a2_select" onchange="calcA2()">
-                    <option value="1">1.00 - ≥ 6 ciclos</option>
-                    <option value="0.75">0.75 - 4 a 5 ciclos</option>
-                    <option value="0.5">0.50 - 2 a 3 ciclos</option>
-                    <option value="0.25">0.25 - 1 ciclo</option>
-                    <option value="0">0.00 - 0 ciclo</option>
+                    <option value="1">1.00 - ≥ 6 cycles</option>
+                    <option value="0.75">0.75 - 4 to 5 cycles</option>
+                    <option value="0.5">0.50 - 2 to 3 cycles</option>
+                    <option value="0.25">0.25 - 1 cycle</option>
+                    <option value="0">0.00 - 0 cycle</option>
                 </select>
             </div>
             <div class="score-box">
@@ -274,13 +274,13 @@
         <!-- A3 -->
         <div class="criteria-row">
             <div class="input-group">
-                <label>A3: Condições Reais</label>
+                <label>A3: Real Conditions</label>
                 <select id="a3_select" onchange="calcA3()">
-                    <option value="1">1.00 - ≥80% em real/simulado + interferentes</option>
-                    <option value="0.75">0.75 - <80% real, mas ≥80% com ajuste pH</option>
-                    <option value="0.5">0.50 - ≥80% lab com espécie interferente</option>
-                    <option value="0.25">0.25 - ≥80% lab sem espécie interferente</option>
-                    <option value="0">0.00 - Nenhum critério atendido</option>
+                    <option value="1">1.00 - ≥80% in real/simulated + interferents</option>
+                    <option value="0.75">0.75 - <80% real, but ≥80% with pH adjustment</option>
+                    <option value="0.5">0.50 - ≥80% lab with interfering species</option>
+                    <option value="0.25">0.25 - ≥80% lab without interfering species</option>
+                    <option value="0">0.00 - No criteria met</option>
                 </select>
             </div>
             <div class="score-box">
@@ -292,15 +292,15 @@
         <!-- A4 -->
         <div class="criteria-row">
             <div class="input-group">
-                <label>A4: Solvente na Regeneração</label>
+                <label>A4: Solvent in Regeneration</label>
                 <select id="a4_select" onchange="calcA4()">
-                    <option value="1">1.00 - Verdes (Água, Etanol, CO2)</option>
-                    <option value="0.87">0.87 - Ácido/Base Fraca</option>
+                    <option value="1">1.00 - Green (Water, Ethanol, CO2)</option>
+                    <option value="0.87">0.87 - Weak Acid/Base</option>
                     <option value="0.75">0.75 - Isopropanol</option>
-                    <option value="0.63">0.63 - Acetona</option>
-                    <option value="0.5">0.50 - Metanol</option>
-                    <option value="0.38">0.38 - Ácido/Base Forte</option>
-                    <option value="0.25">0.25 - Acetonitrila</option>
+                    <option value="0.63">0.63 - Acetone</option>
+                    <option value="0.5">0.50 - Methanol</option>
+                    <option value="0.38">0.38 - Strong Acid/Base</option>
+                    <option value="0.25">0.25 - Acetonitrile</option>
                     <option value="0.1">0.10 - DMSO</option>
                     <option value="0">0.00 - DMF</option>
                 </select>
@@ -314,13 +314,13 @@
         <!-- A5 -->
         <div class="criteria-row">
             <div class="input-group">
-                <label>A5: Lixiviação Secundária (Aplicação)</label>
+                <label>A5: Secondary Leaching (Application)</label>
                 <select id="a5_select" onchange="calcA5()">
-                    <option value="1">1.00 - Sem espécies tóxicas</option>
-                    <option value="0.75">0.75 - Com espécies, Sem lixiviação</option>
-                    <option value="0.5">0.50 - Com espécies, Abaixo limite</option>
-                    <option value="0.25">0.25 - Com espécies, Acima limite</option>
-                    <option value="0">0.00 - Com espécies, Sem estudo</option>
+                    <option value="1">1.00 - No toxic species</option>
+                    <option value="0.75">0.75 - With species, No leaching</option>
+                    <option value="0.5">0.50 - With species, Below limit</option>
+                    <option value="0.25">0.25 - With species, Above limit</option>
+                    <option value="0">0.00 - With species, No study</option>
                 </select>
             </div>
             <div class="score-box">
@@ -329,17 +329,17 @@
             </div>
         </div>
 
-        <!-- ======================= DESCARTE ======================= -->
-        <h3 class="section-title">Etapa de Descarte (D)</h3>
+        <!-- ======================= DISPOSAL ======================= -->
+        <h3 class="section-title">Disposal Stage (D)</h3>
 
         <!-- D1 -->
         <div class="criteria-row">
             <div class="input-group">
-                <label>D1: Estabilidade Química (ΔpH)</label>
+                <label>D1: Chemical Stability (ΔpH)</label>
                 <select id="d1_select" onchange="calcD1()">
-                    <option value="1">1.00 - ΔpH ≤ 0.5 (Alta)</option>
-                    <option value="0.5">0.50 - 0.5 < ΔpH ≤ 1.5 (Moderada)</option>
-                    <option value="0">0.00 - ΔpH > 1.5 (Baixa)</option>
+                    <option value="1">1.00 - ΔpH ≤ 0.5 (High)</option>
+                    <option value="0.5">0.50 - 0.5 < ΔpH ≤ 1.5 (Moderate)</option>
+                    <option value="0">0.00 - ΔpH > 1.5 (Low)</option>
                 </select>
             </div>
             <div class="score-box">
@@ -351,13 +351,13 @@
         <!-- D2 -->
         <div class="criteria-row">
             <div class="input-group">
-                <label>D2: Contaminação Secundária (Descarte)</label>
+                <label>D2: Secondary Contamination (Disposal)</label>
                 <select id="d2_select" onchange="calcD2()">
-                    <option value="1">1.00 - Sem espécies tóxicas</option>
-                    <option value="0.75">0.75 - Com espécies, Sem lixiviação</option>
-                    <option value="0.5">0.50 - Com espécies, Abaixo limite</option>
-                    <option value="0.25">0.25 - Com espécies, Acima limite</option>
-                    <option value="0">0.00 - Com espécies, Sem estudo</option>
+                    <option value="1">1.00 - No toxic species</option>
+                    <option value="0.75">0.75 - With species, No leaching</option>
+                    <option value="0.5">0.50 - With species, Below limit</option>
+                    <option value="0.25">0.25 - With species, Above limit</option>
+                    <option value="0">0.00 - With species, No study</option>
                 </select>
             </div>
             <div class="score-box">
@@ -369,27 +369,27 @@
         <!-- D3 -->
         <div class="criteria-row">
             <div class="input-group">
-                <label>D3: Composição do Resíduo</label>
+                <label>D3: Residue Composition</label>
                 <table id="d3_table">
-                    <thead><tr><th>Componente</th><th>Fração (f)</th><th>Score (S)</th><th></th></tr></thead>
+                    <thead><tr><th>Component</th><th>Fraction (f)</th><th>Score (S)</th><th></th></tr></thead>
                     <tbody>
                         <tr>
-                            <td><input type="text" placeholder="Ex: Argila"></td>
+                            <td><input type="text" placeholder="Ex: Clay"></td>
                             <td><input type="number" class="d3-f" value="1" step="0.1" max="1" min="0" oninput="calcD3()"></td>
                             <td>
                                 <select class="d3-s" onchange="calcD3()">
-                                    <option value="1">1.00 - Reaproveitado/Verde</option>
-                                    <option value="0.75">0.75 - Natural/Não tóxico</option>
-                                    <option value="0.5">0.50 - Sintético verde</option>
-                                    <option value="0.25">0.25 - Sintético/Natural tox.</option>
-                                    <option value="0">0.00 - Tóxico/Difícil descarte</option>
+                                    <option value="1">1.00 - Reused/Green</option>
+                                    <option value="0.75">0.75 - Natural/Non-toxic</option>
+                                    <option value="0.5">0.50 - Green synthetic</option>
+                                    <option value="0.25">0.25 - Synthetic/Toxic natural</option>
+                                    <option value="0">0.00 - Toxic/Hard to dispose</option>
                                 </select>
                             </td>
                             <td></td>
                         </tr>
                     </tbody>
                 </table>
-                <button type="button" class="add-btn" onclick="addD3Row()">+ Componente</button>
+                <button type="button" class="add-btn" onclick="addD3Row()">+ Component</button>
             </div>
             <div class="score-box">
                 <span class="score-label">Score D3</span>
@@ -400,10 +400,10 @@
         <!-- D4 -->
         <div class="criteria-row">
             <div class="input-group">
-                <label>D4: Estabilidade Adsorvente-Poluente</label>
+                <label>D4: Adsorbent-Pollutant Stability</label>
                 <select id="d4_select" onchange="calcD4()">
-                    <option value="1">1.00 - Não libera poluente</option>
-                    <option value="0">0.00 - Libera poluente</option>
+                    <option value="1">1.00 - Does not release pollutant</option>
+                    <option value="0">0.00 - Releases pollutant</option>
                 </select>
             </div>
             <div class="score-box">
@@ -413,21 +413,21 @@
         </div>
 
         <div style="text-align: center;">
-            <button type="button" class="calc-btn" onclick="calcTotal()">Calcular Índice ADSUS</button>
+            <button type="button" class="calc-btn" onclick="calcTotal()">Calculate ADSUS Index</button>
         </div>
 
     </form>
 
     <div class="result-section">
-        <h3>Índice de Sustentabilidade</h3>
+        <h3>Sustainability Index</h3>
         
         <!-- SVG CHART AREA -->
         <div class="chart-container" id="svg-chart-wrapper">
             <!-- SVG injected by JS -->
         </div>
 
-        <!-- Texto de classificação com fonte maior -->
-        <h2 id="final_classification" style="margin-top: 5px; font-weight: 800; text-transform: uppercase;">Aguardo cálculo...</h2>
+        <!-- Classification Text -->
+        <h2 id="final_classification" style="margin-top: 5px; font-weight: 800; text-transform: uppercase;">Waiting for calculation...</h2>
 
         <div class="legend">
             <div class="legend-item"><span class="dot" style="background:var(--c-excellent)"></span>0.85 – 1.00: Excellent (Green Adsorbent)</div>
@@ -440,7 +440,7 @@
 </div>
 
 <script>
-    // --- FUNÇÕES DE CÁLCULO INDIVIDUAL (Lógica padrão mantida) ---
+    // --- INDIVIDUAL CALCULATION FUNCTIONS ---
     function updateDisplay(id, val) { document.getElementById(id).innerText = val.toFixed(2); }
 
     function calcP1() {
@@ -537,7 +537,7 @@
     }
     function calcD4() { let s = parseFloat(document.getElementById('d4_select').value); updateDisplay('score_d4', s); return s; }
 
-    // --- GRÁFICO SVG E LÓGICA DE CORES ---
+    // --- SVG CHART AND COLOR LOGIC ---
     
     function getColor(val) {
         if(val >= 0.85) return "var(--c-excellent)";
@@ -555,7 +555,6 @@
         };
     }
     
-    // Desenha uma "fatia" (annular sector)
     function createSlicePath(x, y, rOuter, rInner, startAngle, endAngle) {
         var startOuter = polarToCartesian(x, y, rOuter, endAngle);
         var endOuter = polarToCartesian(x, y, rOuter, startAngle);
@@ -583,19 +582,15 @@
         wrapper.innerHTML = ""; 
 
         const w = 500, h = 260;
-        const cx = 250, cy = 240; // Centro abaixado para aproveitar o arco superior
+        const cx = 250, cy = 240; 
         
-        // Configuração de Raios
         const rCriteriaOut = 230;
         const rCriteriaIn = 190;
         const rStageOut = 188;
         const rStageIn = 145;
-        
-        // Novo Raio para o Score Global (Arco Interno)
         const rGlobalOut = 135;
         const rGlobalIn = 125;
 
-        // Configuração Angular
         const totalItems = 15;
         const sliceDeg = 180 / totalItems;
         
@@ -604,11 +599,11 @@
         svg.setAttribute("height", "100%");
         svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
         
-        // --- 1. DESENHAR CRITÉRIOS INDIVIDUAIS (Anel Externo) ---
+        // --- 1. INDIVIDUAL CRITERIA (Outer Ring) ---
         let currentAngle = 0;
         const gap = 1; 
 
-        const drawGroup = (scores, labelPrefix, startIndex) => {
+        const drawGroup = (scores) => {
             scores.forEach((score, i) => {
                 const start = currentAngle + gap;
                 const end = currentAngle + sliceDeg - gap;
@@ -635,20 +630,16 @@
             });
         };
 
-        drawGroup(pScores, "P", 1);
-        drawGroup(aScores, "A", 1);
-        drawGroup(dScores, "D", 1);
+        drawGroup(pScores);
+        drawGroup(aScores);
+        drawGroup(dScores);
 
-        // --- 2. DESENHAR ETAPAS (Anel do Meio) ---
+        // --- 2. STAGES (Middle Ring) ---
         const avg = arr => arr.reduce((a,b)=>a+b,0)/arr.length;
-        const scoreP = avg(pScores);
-        const scoreA = avg(aScores);
-        const scoreD = avg(dScores);
-        
         const stages = [
-            { id: "P", count: 6, score: scoreP },
-            { id: "A", count: 5, score: scoreA },
-            { id: "D", count: 4, score: scoreD }
+            { id: "P", count: 6, score: avg(pScores) },
+            { id: "A", count: 5, score: avg(aScores) },
+            { id: "D", count: 4, score: avg(dScores) }
         ];
 
         let stageAngle = 0;
@@ -678,17 +669,17 @@
             stageAngle += spanDeg;
         });
 
-        // --- 3. ARCO DO GLOBAL SCORE (Anel Interno - Meia Lua) ---
+        // --- 3. GLOBAL SCORE ARC (Inner Ring) ---
         const globalPath = document.createElementNS(svgNS, "path");
         globalPath.setAttribute("d", createSlicePath(cx, cy, rGlobalOut, rGlobalIn, 0, 180));
         globalPath.setAttribute("fill", getColor(finalScore));
         svg.appendChild(globalPath);
 
-        // Lógica D4 para cor laranja e observação
+        // D4 check for orange color and observation
         const d4Val = document.getElementById('d4_select').value;
         const orangeColor = "rgb(255, 165, 0)";
 
-        // --- TEXTO DA NOTA GLOBAL ---
+        // --- GLOBAL SCORE TEXT ---
         const scoreText = document.createElementNS(svgNS, "text");
         scoreText.setAttribute("x", cx);
         scoreText.setAttribute("y", cy - 25); 
@@ -696,7 +687,6 @@
         scoreText.setAttribute("dominant-baseline", "alphabetic");
         scoreText.setAttribute("class", "global-score-text");
         
-        // Se D4 liberar poluente, muda a cor da NOTA (o número) para LARANJA explicitamente
         if(d4Val === "0") {
             scoreText.style.fill = orangeColor;
             scoreText.setAttribute("fill", orangeColor);
@@ -707,7 +697,7 @@
         scoreText.textContent = finalScore.toFixed(2);
         svg.appendChild(scoreText);
 
-        // --- OBSERVAÇÃO "Não Inócuo" ---
+        // --- "Non-Innocuous" WARNING ---
         if(d4Val === "0") {
             const warningText = document.createElementNS(svgNS, "text");
             warningText.setAttribute("x", cx);
@@ -717,14 +707,14 @@
             warningText.setAttribute("font-size", "16px");
             warningText.setAttribute("font-weight", "bold");
             warningText.setAttribute("fill", orangeColor);
-            warningText.textContent = "Não Inócuo";
+            warningText.textContent = "Not-Innocuous";
             svg.appendChild(warningText);
         }
 
         wrapper.appendChild(svg);
     }
 
-    // --- CÁLCULO FINAL ---
+    // --- FINAL CALCULATION ---
     function calcTotal() {
         const pScores = [calcP1(), calcP2(), calcP3(), calcP4(), calcP5(), calcP6()];
         const aScores = [calcA1(), calcA2(), calcA3(), calcA4(), calcA5()];
@@ -734,10 +724,8 @@
         const sum = allScores.reduce((a, b) => a + b, 0);
         const finalScore = sum / allScores.length;
 
-        // Desenhar SVG
         drawChart(pScores, aScores, dScores, finalScore);
         
-        // Texto de Classificação
         const txt = document.getElementById('final_classification');
         let label = "", color = "#333";
         if(finalScore >= 0.85) { label = "Excellent (Green Adsorbent)"; color = "var(--c-excellent)"; }
@@ -750,7 +738,6 @@
         txt.style.color = color;
     }
 
-    // Init
     window.onload = function() { calcTotal(); }
 
 </script>
